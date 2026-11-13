@@ -1,0 +1,31 @@
+<!doctype html>
+<!-- Dev tool: renders the riso map for previews and for the intro's frame sequence.
+     Open via the dev server: http://localhost:5173/tools/riso-render.html?fold=0.4&turn=0.2&size=720&dark=0 -->
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      html, body { margin: 0; background: transparent; }
+      canvas { display: block; }
+    </style>
+  </head>
+  <body>
+    <canvas id="c"></canvas>
+    <script type="module">
+      import { createRisoMap } from '/src/riso/mapRenderer.ts';
+      const q = new URLSearchParams(location.search);
+      const size = Number(q.get('size') ?? 720);
+      const dark = q.get('dark') === '1';
+      const c = document.getElementById('c');
+      c.style.width = c.style.height = size + 'px';
+      const hex = (h) => [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16) / 255);
+      const colors = dark
+        ? { paper: hex('16182c'), sheet: hex('1f2238'), blue: hex('93a8f5'), coral: hex('ff9a88'), dark: true }
+        : { paper: hex('f4eddf'), sheet: hex('fbf7ee'), blue: hex('2d4fa8'), coral: hex('ff7f6a'), dark: false };
+      const map = createRisoMap(c, colors, { maxDpr: Number(q.get('dpr') ?? 1), cell: Number(q.get('cell') ?? 5) });
+      window.renderAt = (fold, turn) => { map.render(fold, turn, 0); return true; };
+      window.renderAt(Number(q.get('fold') ?? 0.4), Number(q.get('turn') ?? 0.2));
+      window.ready = true;
+    </script>
+  </body>
+</html>

@@ -65,17 +65,17 @@ export function ExerciseHost({ first, also, onDone }: { first: ExerciseId; also:
         </div>
       )}
 
-      <p className="text-body font-bold text-ink-soft">{S.exercise.names[current]}</p>
+      <p className="tab self-start">{S.exercise.names[current]}</p>
 
       {breathing && prefs.sound === null && (
-        <div className="mt-4 rounded-soft bg-card p-4 shadow-soft" role="group" aria-labelledby="sound-q">
-          <p id="sound-q" className="text-body font-bold">{S.exercise.soundTitle}</p>
+        <div className="taped mt-6 px-4 pb-4 pt-5" role="group" aria-labelledby="sound-q">
+          <p id="sound-q" className="font-display text-lead font-bold">{S.exercise.soundTitle}</p>
           <p className="text-small text-ink-soft">{S.exercise.soundBody}</p>
           <div className="mt-3 flex gap-3">
-            <button type="button" onClick={() => chooseSound(true)} className="flex-1 rounded-xl border-2 border-line bg-paper px-4 py-3 text-body font-bold">
+            <button type="button" onClick={() => chooseSound(true)} className="sticker flex-1 px-4 py-3 font-display text-body font-bold">
               {S.exercise.soundOn}
             </button>
-            <button type="button" onClick={() => chooseSound(false)} className="flex-1 rounded-xl border-2 border-line bg-paper px-4 py-3 text-body font-bold">
+            <button type="button" onClick={() => chooseSound(false)} className="sticker flex-1 px-4 py-3 font-display text-body font-bold">
               {S.exercise.soundOff}
             </button>
           </div>
@@ -98,7 +98,7 @@ export function ExerciseHost({ first, also, onDone }: { first: ExerciseId; also:
       <div className="flex flex-col gap-3">
         {breathing && prefs.sound !== null && (
           <div className="flex flex-wrap justify-center gap-2">
-            <button type="button" onClick={toggleSound} aria-pressed={prefs.sound === 'on'} className="rounded-full border border-line px-4 py-2 text-small">
+            <button type="button" onClick={toggleSound} aria-pressed={prefs.sound === 'on'} className="rounded-full border-2 border-line-strong bg-card px-4 py-2 font-display text-small font-bold">
               {prefs.sound === 'on' ? S.exercise.mute : S.exercise.unmute}
             </button>
             {'vibrate' in navigator && (
@@ -106,7 +106,7 @@ export function ExerciseHost({ first, also, onDone }: { first: ExerciseId; also:
                 type="button"
                 onClick={() => setPrefs({ haptics: !prefs.haptics })}
                 aria-pressed={prefs.haptics}
-                className="rounded-full border border-line px-4 py-2 text-small"
+                className="rounded-full border-2 border-line-strong bg-card px-4 py-2 font-display text-small font-bold"
               >
                 {prefs.haptics ? S.exercise.hapticsOn : S.exercise.hapticsOff}
               </button>
@@ -116,11 +116,11 @@ export function ExerciseHost({ first, also, onDone }: { first: ExerciseId; also:
 
         {others.length > 0 && (
           <details className="rounded-xl text-center">
-            <summary className="cursor-pointer rounded-lg py-2 text-small text-accent-ink">{S.exercise.trySomethingElse}</summary>
+            <summary className="cursor-pointer rounded-lg py-2 font-display text-small font-bold text-accent-ink">{S.exercise.trySomethingElse}</summary>
             <ul className="mt-2 flex flex-col gap-2">
               {others.map((x) => (
                 <li key={x}>
-                  <button type="button" onClick={() => setCurrent(x)} className="w-full rounded-xl border border-line bg-card px-4 py-3 text-body">
+                  <button type="button" onClick={() => setCurrent(x)} className="sticker w-full px-4 py-3 font-display text-body font-bold">
                     {S.exercise.names[x]}
                   </button>
                 </li>
@@ -133,7 +133,7 @@ export function ExerciseHost({ first, also, onDone }: { first: ExerciseId; also:
           type="button"
           onClick={onDone}
           data-autofocus
-          className="min-h-14 w-full rounded-soft bg-accent px-6 py-3 text-lead font-bold text-on-accent shadow-soft"
+          className="sticker sticker-blue min-h-14 w-full px-6 py-3 font-display text-lead font-bold"
         >
           {S.exercise.ready}
         </button>

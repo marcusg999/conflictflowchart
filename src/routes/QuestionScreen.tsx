@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router';
 import { flow } from '../content.ts';
 import { Shell } from '../components/Shell.tsx';
 import { Trail } from '../components/Trail.tsx';
+import { BackButton } from '../components/BackButton.tsx';
 import { ResourceChips } from '../components/ResourceChips.tsx';
+import { Arrow } from '../components/Marks.tsx';
 import { routeFor, useSession } from '../state/SessionProvider.tsx';
 import { S } from '../strings.ts';
 
@@ -18,6 +20,7 @@ export function QuestionScreen({ nodeId }: { nodeId: string }) {
   useEffect(() => heading.current?.focus({ preventScroll: true }), []);
 
   if (node.type !== 'question') return null;
+  const phase = flow.phases.find((p) => p.id === node.phase);
 
   const choose = (label: string, next: string) => {
     answer(nodeId, label);
@@ -31,33 +34,50 @@ export function QuestionScreen({ nodeId }: { nodeId: string }) {
   };
 
   return (
-    <Shell>
-      <Trail />
-      <main className="screen-in flex flex-1 flex-col" aria-labelledby={`q-${nodeId}`}>
-        <div className="flex flex-col gap-3 pt-6">
-          <h1 id={`q-${nodeId}`} ref={heading} tabIndex={-1} className="text-question font-bold text-ink">
+    <Shell left={<BackButton />}>
+      <main className="flex flex-1 flex-col" aria-labelledby={`q-${nodeId}`}>
+        <div className="relative pt-10">
+          {phase && (
+            <p className="stamp ml-[12%]">
+              <span className="tab -rotate-2">{phase.title}</span>
+            </p>
+          )}
+          <h1
+            id={`q-${nodeId}`}
+            ref={heading}
+            tabIndex={-1}
+            className="riso-question stamp stamp-2 -ml-0.5 mt-4 pr-4 text-question"
+          >
             {node.prompt}
           </h1>
-          {node.help && <p className="text-lead text-ink-soft">{node.help}</p>}
-          <ResourceChips ids={node.resources ?? []} />
+          {node.help && (
+            <p className="stamp stamp-3 ml-[12%] mt-4 border-l-4 border-coral pl-3 text-lead text-ink-soft">{node.help}</p>
+          )}
+          <div className="stamp stamp-4 ml-[12%] mt-2">
+            <ResourceChips ids={node.resources ?? []} />
+          </div>
         </div>
 
         <div className="mt-auto flex flex-col gap-4 pt-10" role="group" aria-labelledby={`q-${nodeId}`}>
-          {node.choices.map((c) => (
+          {node.choices.map((c, i) => (
             <button
               key={c.label}
               type="button"
               onClick={() => choose(c.label, c.next)}
-              className="min-h-16 w-full rounded-soft border-2 border-line bg-card px-6 py-4 text-left text-lead font-bold text-ink shadow-soft transition-colors hover:border-accent active:bg-accent-soft motion-reduce:transition-none"
+              className={`sticker stamp ${i % 2 ? 'sticker-tilt-r stamp-3' : 'sticker-tilt-l stamp-2'} flex min-h-16 w-full items-center justify-between gap-3 px-6 py-4 text-left font-display text-lead font-bold`}
             >
               {c.label}
+              <Arrow className="h-5 w-9 shrink-0 text-blue" />
             </button>
           ))}
         </div>
       </main>
 
-      <footer className="mt-8 flex justify-center">
-        <button type="button" onClick={putDown} className="rounded-lg px-3 py-2 text-small text-ink-soft underline-offset-4 hover:underline">
+      <footer className="mt-8 flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
+        <div className="min-w-0 flex-1">
+          <Trail />
+        </div>
+        <button type="button" onClick={putDown} className="rounded-lg px-1 py-1.5 text-small text-ink-soft underline decoration-coral decoration-2 underline-offset-4">
           {S.question.putDown}
         </button>
       </footer>

@@ -58,7 +58,17 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,woff2,webmanifest}'],
+        globPatterns: ['**/*.{js,css,html,svg,png,webp,woff2,webmanifest}'],
+        // The intro's frame sequence (~1.5 MB per theme) is cached the first time it's seen,
+        // not on install. Until then the intro shows the precached still.
+        globIgnores: ['**/riso/intro-*/**'],
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => url.pathname.includes('/riso/intro-'),
+            handler: 'CacheFirst',
+            options: { cacheName: 'riso-intro', expiration: { maxEntries: 80 } },
+          },
+        ],
         navigateFallback: 'index.html',
         cleanupOutdatedCaches: true,
       },

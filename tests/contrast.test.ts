@@ -44,7 +44,14 @@ describe('colour contrast (WCAG AA)', () => {
     });
   }
 
-  it('review-mode highlight text', () => {
-    expect(contrast('#3d2c0c', '#fdf3e1')).toBeGreaterThanOrEqual(4.5);
+  it('blue ink (display type, links) on paper, and ink on the coral tint (tabs, review flags)', () => {
+    for (const t of [light, dark]) {
+      expect(contrast(t['blue']!, t['paper']!)).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(t['blue']!, t['card']!)).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(t['ink']!, t['coral-soft']!)).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(t['ink']!, t['blue-soft']!)).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(t['accent-ink']!, t['blue-soft']!)).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(t['on-accent']!, t['blue']!)).toBeGreaterThanOrEqual(4.5);
+    }
   });
 });

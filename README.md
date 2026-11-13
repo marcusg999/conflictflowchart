@@ -165,6 +165,27 @@ Installed copies on phones update themselves the next time they're opened online
   exists so the app can stay silent in a home where it needs to.
 - The app never resumes into the middle of a walk without asking first.
 
+## How it looks
+
+The design is a **risograph zine**: two flat inks, blue and coral, on cream
+newsprint, printed slightly out of register. The playfulness is in the details:
+sticker-like answer buttons, taped-down outcome pages, a tilted label for each
+section, a hand-drawn arrow. The reading stays calm: one question per screen and
+big, even answers. "Yes" and "No" always look the same.
+
+- **Home:** a folded paper map, drawn live in WebGL as a two-ink halftone print,
+  breathes slowly behind the title. Without WebGL, or with reduced motion, it's a still image.
+- **Intro:** as you scroll, the map unfolds (a pre-rendered image sequence) while
+  the panels slide up over it.
+- **Navigation:** every question has a **Back** button (one step back), and
+  "How I got here" is printed like a receipt. Tap any line to go back to it.
+- **Deliberately plain:** the safety screen, "You're allowed to leave", and Quick
+  Exit get no tilt, no tape and no animation.
+
+Fonts (self-hosted, SIL Open Font License): Bricolage Grotesque for display,
+Atkinson Hyperlegible Next for reading. To regenerate the intro's image sequence
+after changing the map's look, run `npm run dev`, then `node tools/render-intro.cjs`.
+
 ## Accessibility
 
 - Each question is the page's main heading, and focus moves to it so screen

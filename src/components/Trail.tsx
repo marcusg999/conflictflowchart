@@ -5,8 +5,8 @@ import { routeFor, useSession } from '../state/SessionProvider.tsx';
 import { S } from '../strings.ts';
 
 /**
- * "How I got here": the answers so far, collapsed by default.
- * Tapping one goes back to that question; everything after it is dropped.
+ * "How I got here": the answers so far, printed like a receipt. Collapsed by
+ * default. Tapping a line goes back to that question; everything after it is dropped.
  */
 export function Trail() {
   const { state, rewind } = useSession();
@@ -27,34 +27,33 @@ export function Trail() {
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-2 self-start rounded-lg py-2 text-small text-ink-soft"
+        className="inline-flex items-center gap-2 self-start rounded-full px-1 py-1.5 font-display text-small font-bold text-ink-soft"
       >
         <span aria-hidden="true" className={`inline-block transition-transform motion-reduce:transition-none ${open ? 'rotate-90' : ''}`}>
-          ›
+          ▸
         </span>
         {open ? S.question.trailHide : S.question.trailShow}
       </button>
       {open && (
-        <div id={panelId} className="fade-in">
+        <div id={panelId} className="fade-in receipt mt-1 px-4 pb-6 pt-3">
           {state.path.length === 0 ? (
             <p className="py-2 text-small text-ink-soft">{S.question.trailEmpty}</p>
           ) : (
-            <ol className="flex flex-col gap-2 border-l-2 border-line py-2 pl-4">
+            <ol className="flex flex-col">
               {state.path.map((entry, i) => {
                 const node = flow.nodes[entry.nodeId]!;
                 const said = node.type === 'question' ? node.prompt : node.title;
                 return (
-                  <li key={`${i}-${entry.nodeId}`}>
-                    <button
-                      type="button"
-                      onClick={() => goBackTo(i)}
-                      className="w-full rounded-xl px-2 py-2 text-left hover:bg-paper-deep"
-                    >
-                      <span className="block text-small text-ink-soft">{said}</span>
-                      <span className="block text-body font-bold text-ink">
-                        {entry.choiceLabel ?? S.question.trailTookBreak}
+                  <li key={`${i}-${entry.nodeId}`} className="border-b border-dashed border-line last:border-0">
+                    <button type="button" onClick={() => goBackTo(i)} className="flex w-full gap-3 rounded-lg px-1 py-2.5 text-left">
+                      <span aria-hidden="true" className="riso-display pt-0.5 text-small font-bold text-coral">
+                        {String(i + 1).padStart(2, '0')}
                       </span>
-                      <span className="sr-only">. {S.question.trailChange}</span>
+                      <span className="flex-1">
+                        <span className="block text-small text-ink-soft">{said}</span>
+                        <span className="block font-display text-body font-bold text-ink">{entry.choiceLabel ?? S.question.trailTookBreak}</span>
+                        <span className="sr-only">. {S.question.trailChange}</span>
+                      </span>
                     </button>
                   </li>
                 );

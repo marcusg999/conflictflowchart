@@ -17,23 +17,23 @@ export function Review() {
       {said(flow.nodes[id]!)}
     </a>
   );
-  const flag = 'rounded-soft border-2 border-dashed border-[#b8862e] bg-[#fdf3e1] text-[#3d2c0c]';
+  const flag = 'rounded-soft border-2 border-dashed border-line-strong bg-coral-soft text-ink';
 
   return (
     <div className="mx-auto w-full max-w-3xl px-5 py-8">
-      <h1 className="text-question font-bold">{S.review.title}</h1>
+      <h1 className="riso-title text-hero">{S.review.title}</h1>
       <p className="mt-2 text-ink-soft">{S.review.intro}</p>
       <button
         type="button"
         onClick={async () => setStatus((await copyText(reviewText(flow, resources))) ? S.common.copied : S.common.copyFailed)}
-        className="mt-4 rounded-soft bg-accent px-5 py-3 font-bold text-on-accent"
+        className="sticker sticker-blue mt-6 px-5 py-3 font-display font-bold"
       >
         {S.review.copy}
       </button>
       <span role="status" className="ml-3 text-small text-ink-soft">{status}</span>
 
       <section className={`mt-8 p-5 ${flag}`} aria-labelledby="attention">
-        <h2 id="attention" className="text-lead font-bold">{S.review.attention}</h2>
+        <h2 id="attention" className="font-display text-lead font-bold">{S.review.attention}</h2>
         {issues.noInbound.length > 0 && (
           <>
             <p className="mt-3 font-bold">{S.review.noInbound}</p>
@@ -56,12 +56,12 @@ export function Review() {
 
       {flow.phases.map((phase) => (
         <section key={phase.id} className="mt-10" aria-labelledby={`ph-${phase.id}`}>
-          <h2 id={`ph-${phase.id}`} className="border-b-2 border-line pb-2 text-lead font-bold">{phase.title}</h2>
+          <h2 id={`ph-${phase.id}`} className="riso-display border-b-[3px] border-line-strong pb-2 text-question font-bold">{phase.title}</h2>
           <ul className="mt-4 flex flex-col gap-4">
             {Object.entries(flow.nodes)
               .filter(([, n]) => n.phase === phase.id)
               .map(([id, n]) => (
-                <li key={id} id={id} className={`p-4 ${n.confirmed ? 'rounded-soft bg-card shadow-soft' : flag}`}>
+                <li key={id} id={id} className={`p-4 ${n.confirmed ? 'rounded-soft border-2 border-line-strong bg-card' : flag}`}>
                   <p className="text-small text-ink-soft">
                     <code>{id}</code> · {n.type}
                     {n.type === 'outcome' && ` · ${n.tone}`}
@@ -94,10 +94,10 @@ export function Review() {
       ))}
 
       <section className="mt-10" aria-labelledby="res-title">
-        <h2 id="res-title" className="border-b-2 border-line pb-2 text-lead font-bold">{S.review.resourcesTitle}</h2>
+        <h2 id="res-title" className="riso-display border-b-[3px] border-line-strong pb-2 text-question font-bold">{S.review.resourcesTitle}</h2>
         <ul className="mt-4 flex flex-col gap-3">
           {Object.entries(resources.resources).map(([id, r]) => (
-            <li key={id} className={`p-4 ${r.confirmed ? 'rounded-soft bg-card shadow-soft' : flag}`}>
+            <li key={id} className={`p-4 ${r.confirmed ? 'rounded-soft border-2 border-line-strong bg-card' : flag}`}>
               <p className="font-bold">{r.label} <code className="text-small font-normal">({id}, {r.type})</code></p>
               {r.note && <p className="text-small">{r.note}</p>}
             </li>

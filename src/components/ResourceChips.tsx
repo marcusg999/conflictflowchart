@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { Sheet } from './Sheet.tsx';
 import { ResourceContent, getResource } from './ResourceContent.tsx';
+import { Spark } from './Marks.tsx';
 import { primeAudioFromGesture } from '../exercises/audio.ts';
 import { getPrefs } from '../state/prefs.ts';
 import { S } from '../strings.ts';
 
 /**
- * Quiet, inviting links under a question. Each opens a sheet over the screen;
- * closing it returns to exactly the same question.
+ * Quiet, inviting links under a question, printed like little stickers.
+ * Each opens a sheet over the screen; closing it returns to exactly the same question.
  */
 export function ResourceChips({ ids }: { ids: string[] }) {
   const [openId, setOpenId] = useState<string | null>(null);
@@ -28,9 +29,9 @@ export function ResourceChips({ ids }: { ids: string[] }) {
                 if (r!.type === 'exercise' && getPrefs().sound === 'on') primeAudioFromGesture();
                 setOpenId(id);
               }}
-              className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-4 py-2 text-small font-bold text-accent-ink"
+              className="inline-flex -rotate-1 items-center gap-2 rounded-full border-2 border-blue bg-blue-soft px-4 py-2 font-display text-small font-bold text-accent-ink"
             >
-              <span aria-hidden="true">✦</span>
+              <Spark className="h-4 w-4 text-coral" />
               {r!.label}
             </button>
           </li>

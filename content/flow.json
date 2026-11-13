@@ -1,0 +1,305 @@
+{
+  "version": 1,
+  "start": "safe",
+  "phases": [
+    { "id": "safety",       "title": "Safety" },
+    { "id": "regulation",   "title": "Regulation" },
+    { "id": "treatment",    "title": "How you're treating each other" },
+    { "id": "account",      "title": "Accountability & defensiveness" },
+    { "id": "needs_yours",  "title": "Your needs" },
+    { "id": "needs_theirs", "title": "Their needs" },
+    { "id": "impasse",      "title": "Impasse & outcome" }
+  ],
+  "nodes": {
+    "safe": {
+      "type": "question", "phase": "safety",
+      "prompt": "Are you safe?",
+      "help": "Right now, in this moment.",
+      "choices": [
+        { "label": "Yes", "next": "everyone_regulated" },
+        { "label": "No",  "next": "ipv_safety" }
+      ],
+      "confirmed": true
+    },
+    "ipv_safety": {
+      "type": "outcome", "phase": "safety", "tone": "safety",
+      "title": "Get to a safe location.",
+      "resources": ["ipv-resources"],
+      "confirmed": true
+    },
+
+    "everyone_regulated": {
+      "type": "question", "phase": "regulation",
+      "prompt": "Is everyone regulated?",
+      "choices": [
+        { "label": "Yes", "next": "speaking_acting" },
+        { "label": "No",  "next": "breathe" }
+      ],
+      "confirmed": true
+    },
+    "breathe": {
+      "type": "outcome", "phase": "regulation", "tone": "calm",
+      "title": "Take a few moments to breathe, ground and get centered.",
+      "resources": ["breathing-grounding"],
+      "continue": "reaction_makes_sense",
+      "confirmed": true
+    },
+    "reaction_makes_sense": {
+      "type": "question", "phase": "regulation",
+      "prompt": "Does this reaction make sense given the circumstance?",
+      "choices": [
+        { "label": "Yes", "next": "defensiveness" },
+        { "label": "No",  "next": "outsized_reaction" }
+      ],
+      "confirmed": true
+    },
+    "outsized_reaction": {
+      "type": "question", "phase": "regulation",
+      "prompt": "Any idea why you are having an outsized reaction?",
+      "resources": ["relational-wounds"],
+      "choices": [
+        { "label": "Yes", "next": "can_regulate" },
+        { "label": "No",  "next": "individual_therapy" }
+      ],
+      "confirmed": true
+    },
+    "can_regulate": {
+      "type": "question", "phase": "regulation",
+      "prompt": "Are you able to regulate?",
+      "choices": [
+        { "label": "Yes", "next": "aware_own_need" },
+        { "label": "No",  "next": "individual_therapy" }
+      ],
+      "confirmed": true
+    },
+    "individual_therapy": {
+      "type": "outcome", "phase": "regulation", "tone": "action",
+      "title": "Go to individual therapy.",
+      "resources": ["find-a-therapist"],
+      "confirmed": true
+    },
+
+    "speaking_acting": {
+      "type": "question", "phase": "treatment",
+      "prompt": "Are you speaking and acting in ways you expect to be spoken to and treated?",
+      "resources": ["communication"],
+      "choices": [
+        { "label": "Yes", "next": "partner_speaking_acting" },
+        { "label": "No",  "next": "breathe" }
+      ],
+      "confirmed": true
+    },
+    "partner_speaking_acting": {
+      "type": "question", "phase": "treatment",
+      "prompt": "Is your partner?",
+      "help": "Speaking and acting the way they'd expect to be treated.",
+      "choices": [
+        { "label": "Yes", "next": "own_accountability" },
+        { "label": "No",  "next": "set_boundary" }
+      ],
+      "confirmed": true
+    },
+    "set_boundary": {
+      "type": "question", "phase": "treatment",
+      "prompt": "Are you able to set a boundary around treatment?",
+      "resources": ["boundary-setting"],
+      "choices": [
+        { "label": "Yes", "next": "partner_respects_boundary" },
+        { "label": "No",  "next": "breathe" }
+      ],
+      "confirmed": true
+    },
+    "partner_respects_boundary": {
+      "type": "question", "phase": "treatment",
+      "prompt": "Can your partner respect your boundary?",
+      "choices": [
+        { "label": "Yes", "next": "own_accountability" },
+        { "label": "No",  "next": "want_partner_ignores_boundaries" }
+      ],
+      "confirmed": false,
+      "note": "OPEN 1 — the Yes thread runs off the left margin of the chart. Rejoining at 'Can you take accountability' is a guess."
+    },
+    "want_partner_ignores_boundaries": {
+      "type": "question", "phase": "treatment",
+      "prompt": "Do you want a partner who ignores your boundaries?",
+      "resources": ["values"],
+      "choices": [
+        { "label": "Yes", "next": "accept_differences" },
+        { "label": "No",  "next": "allowed_to_leave" }
+      ],
+      "confirmed": false,
+      "note": "OPEN 6 — the No edge is clear. The Yes edge landing on 'Can you accept your partner's differences' is a guess."
+    },
+
+    "own_accountability": {
+      "type": "question", "phase": "account",
+      "prompt": "Can you take accountability for your part in the conflict?",
+      "choices": [
+        { "label": "Yes", "next": "partner_accountability" },
+        { "label": "No",  "next": "defensiveness" }
+      ],
+      "confirmed": true
+    },
+    "partner_accountability": {
+      "type": "question", "phase": "account",
+      "prompt": "Can your partner?",
+      "help": "Take accountability for their part.",
+      "choices": [
+        { "label": "Yes", "next": "aware_own_need" },
+        { "label": "No",  "next": "defensiveness" }
+      ],
+      "confirmed": false,
+      "note": "OPEN 2 — Yes may go to 'Are you aware of what you need?' or to 'Are you both stuck in a disagreement?'"
+    },
+    "defensiveness": {
+      "type": "question", "phase": "account",
+      "prompt": "Is defensiveness present?",
+      "choices": [
+        { "label": "In me",         "next": "can_regulate" },
+        { "label": "In my partner", "next": "help_partner_regulate" },
+        { "label": "No",            "next": "reaction_makes_sense" }
+      ],
+      "confirmed": true
+    },
+    "help_partner_regulate": {
+      "type": "question", "phase": "account",
+      "prompt": "Are you able to help your partner regulate?",
+      "choices": [
+        { "label": "Yes", "next": "aware_own_need" },
+        { "label": "No",  "next": "save_hard_conversations" }
+      ],
+      "confirmed": true
+    },
+    "save_hard_conversations": {
+      "type": "outcome", "phase": "account", "tone": "action",
+      "title": "Save hard conversations for therapy while your partner learns to regulate.",
+      "resources": ["trauma-responses"],
+      "confirmed": true
+    },
+
+    "aware_own_need": {
+      "type": "question", "phase": "needs_yours",
+      "prompt": "Are you aware of what you need?",
+      "choices": [
+        { "label": "Yes", "next": "asked_for_need" },
+        { "label": "No",  "next": "individual_therapy" }
+      ],
+      "confirmed": false,
+      "note": "OPEN 3 — the No line leaves the left margin. 'Go to individual therapy' is a guess."
+    },
+    "asked_for_need": {
+      "type": "question", "phase": "needs_yours",
+      "prompt": "Have you asked for what you need?",
+      "choices": [
+        { "label": "Yes", "next": "ask_reasonable" },
+        { "label": "No",  "next": "do_it_ask" }
+      ],
+      "confirmed": true
+    },
+    "do_it_ask": {
+      "type": "outcome", "phase": "needs_yours", "tone": "action",
+      "title": "Do it.",
+      "body": "Ask for what you need.",
+      "confirmed": true
+    },
+    "ask_reasonable": {
+      "type": "question", "phase": "needs_yours",
+      "prompt": "Is what you are asking for reasonable?",
+      "choices": [
+        { "label": "Yes", "next": "want_partner_cant_meet" },
+        { "label": "No",  "next": "adjust_expectations" }
+      ],
+      "confirmed": true
+    },
+    "adjust_expectations": {
+      "type": "outcome", "phase": "needs_yours", "tone": "action",
+      "title": "Adjust your expectations.",
+      "resources": ["expectations-exercise"],
+      "confirmed": true
+    },
+
+    "aware_partner_need": {
+      "type": "question", "phase": "needs_theirs",
+      "prompt": "Are you aware of what your partner needs?",
+      "resources": ["needs-conversations"],
+      "choices": [
+        { "label": "Yes", "next": "their_need_reasonable" },
+        { "label": "No",  "next": "asked_partner_need" }
+      ],
+      "confirmed": false,
+      "note": "OPEN 4 — nothing currently routes INTO this node. The handoff from the your-needs track sits under a fold in the paper. Reachability test will flag it; that is expected until the therapist answers."
+    },
+    "asked_partner_need": {
+      "type": "question", "phase": "needs_theirs",
+      "prompt": "Have you asked your partner what they need?",
+      "choices": [
+        { "label": "Yes", "next": "their_need_reasonable" },
+        { "label": "No",  "next": "do_it_ask_partner" }
+      ],
+      "confirmed": true
+    },
+    "do_it_ask_partner": {
+      "type": "outcome", "phase": "needs_theirs", "tone": "action",
+      "title": "Do it.",
+      "body": "Ask your partner what they need.",
+      "confirmed": true
+    },
+    "their_need_reasonable": {
+      "type": "question", "phase": "needs_theirs",
+      "prompt": "Is what they need reasonable, and something you are willing to give?",
+      "resources": ["expectations-exercise"],
+      "choices": [
+        { "label": "Yes", "next": "do_it_give" },
+        { "label": "No",  "next": "allowed_to_leave" }
+      ],
+      "confirmed": true
+    },
+    "do_it_give": {
+      "type": "outcome", "phase": "needs_theirs", "tone": "action",
+      "title": "Do it.",
+      "body": "Give what they're asking for.",
+      "confirmed": true
+    },
+
+    "want_partner_cant_meet": {
+      "type": "question", "phase": "impasse",
+      "prompt": "Do you want a partner who can't meet a reasonable need?",
+      "resources": ["values"],
+      "choices": [
+        { "label": "Yes", "next": "accept_differences" },
+        { "label": "No",  "next": "allowed_to_leave" }
+      ],
+      "confirmed": true
+    },
+    "stuck_disagreement": {
+      "type": "question", "phase": "impasse",
+      "prompt": "Are you both stuck in a disagreement?",
+      "choices": [
+        { "label": "Yes", "next": "accept_differences" },
+        { "label": "No",  "next": "good_repair" }
+      ],
+      "confirmed": false,
+      "note": "OPEN 5 — nothing routes into this node, and both outgoing edges are guesses."
+    },
+    "accept_differences": {
+      "type": "question", "phase": "impasse",
+      "prompt": "Can you accept your partner's differences?",
+      "choices": [
+        { "label": "Yes", "next": "good_repair" },
+        { "label": "No",  "next": "allowed_to_leave" }
+      ],
+      "confirmed": true
+    },
+    "good_repair": {
+      "type": "outcome", "phase": "impasse", "tone": "calm",
+      "title": "Good repair.",
+      "body": "Conflict can be healthy.",
+      "confirmed": true
+    },
+    "allowed_to_leave": {
+      "type": "outcome", "phase": "impasse", "tone": "hard",
+      "title": "You're allowed to leave.",
+      "confirmed": true
+    }
+  }
+}

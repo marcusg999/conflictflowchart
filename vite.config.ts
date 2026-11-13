@@ -44,8 +44,9 @@ export default defineConfig({
         name: "So You're In Conflict. Now What?",
         short_name: 'Now What?',
         description: 'The map your therapist uses with you, for the moment you are in it.',
-        start_url: '/',
-        scope: '/',
+        // Relative, so the app also works from a sub-folder (GitHub Pages).
+        start_url: './',
+        scope: './',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#f7f2ea',
@@ -58,7 +59,7 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,woff2,webmanifest}'],
-        navigateFallback: '/index.html',
+        navigateFallback: 'index.html',
         cleanupOutdatedCaches: true,
       },
     }),

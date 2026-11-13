@@ -116,15 +116,29 @@ npm test
 
 ### Publish (redeploy)
 
-**Netlify (recommended).** In Netlify choose "Add new site → Import an existing
-project", pick this GitHub repository, and accept the settings. They come from
-`netlify.toml`, and there are no environment variables to set. After that, every
-change saved to the repository's main branch republishes the site within a minute
-or two. `netlify.toml` also sets the strict privacy headers.
+**GitHub Pages (how it's published now).** The site lives at
+**https://marcusg999.github.io/conflictflowchart/** (the chart review is at
+`…/conflictflowchart/review`). Every change saved to the `main` branch republishes
+it automatically, usually within two minutes. The automatic checks run first; if
+they fail, nothing is published and the live site stays as it was. You can watch
+this under the repository's **Actions** tab ("Publish to GitHub Pages").
 
-**Vercel** works the same way (it reads `vercel.json`). **GitHub Pages** works when
-the site is served from the root of a domain (a custom domain, or a
-`username.github.io` site). It does not work from a `/repository-name/` sub-folder.
+Behind the scenes, `.github/workflows/pages.yml` runs `npm test`, then
+`npm run build:pages`, which builds the app for the `/conflictflowchart/`
+sub-folder, and puts the result on the `gh-pages` branch. In the repository's
+**Settings → Pages**, the source must be "Deploy from a branch: `gh-pages` /
+(root)". Don't edit the `gh-pages` branch by hand; it's overwritten on every publish.
+
+GitHub Pages can't send custom HTTP headers, so the privacy policy is enforced by
+a tag inside the page instead. That covers everything that matters here (no outside
+connections, scripts, fonts or images), but not the setting that stops other sites
+from embedding the app in a frame. Netlify sets that too.
+
+**Netlify** is the alternative with the strictest setup. In Netlify choose "Add new
+site → Import an existing project", pick this GitHub repository, and accept the
+settings. They come from `netlify.toml`, and there are no environment variables to
+set. **Vercel** works the same way (it reads `vercel.json`). Both serve from the
+root of a domain, so they use the plain `npm run build`.
 
 Installed copies on phones update themselves the next time they're opened online.
 

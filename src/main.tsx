@@ -7,7 +7,8 @@ import { AppRoutes } from './App.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
+    {/* BASE_URL is '/' normally, '/conflictflowchart/' on GitHub Pages. */}
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
       <SessionProvider>
         <AppRoutes />
       </SessionProvider>

@@ -43,11 +43,11 @@ export function LinkList({ links }: { links: ResourceLink[] }) {
         const external = link.kind === 'web';
         const shown = link.display ?? link.value.replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, '');
         return (
-          <li key={`${link.kind}:${link.value}`} className="rounded-soft border border-line bg-card p-4 shadow-soft">
+          <li key={`${link.kind}:${link.value}`} className="rounded-soft border-2 border-line-strong bg-card p-4">
             <a
               href={hrefFor(link)}
               {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              className="block rounded-lg text-lead font-bold text-accent-ink underline decoration-2 underline-offset-4"
+              className="block rounded-lg font-display text-lead font-bold text-accent-ink underline decoration-2 underline-offset-4"
             >
               {link.label}
               {external && <span className="sr-only"> {S.resource.opensNewTab}</span>}

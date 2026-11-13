@@ -21,7 +21,7 @@ export function Grounding() {
         aria-disabled={last}
         className="flex flex-1 flex-col items-center justify-center rounded-soft px-4 text-center"
       >
-        <span key={i} className="fade-in text-outcome font-bold text-ink" aria-live="polite">
+        <span key={i} className="fade-in riso-title text-outcome" aria-live="polite">
           {steps[i]}
         </span>
         {!last && <span className="mt-6 text-small text-ink-soft">{S.exercise.grounding.tapToContinue}</span>}

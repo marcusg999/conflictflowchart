@@ -36,11 +36,11 @@ export function SafetyScreen({ nodeId }: { nodeId: string }) {
       <QuickExit prominent />
 
       <main className="flex flex-col gap-6" aria-labelledby="safety-title">
-        <h1 id="safety-title" ref={heading} tabIndex={-1} className="text-outcome font-bold text-ink">
+        <h1 id="safety-title" ref={heading} tabIndex={-1} className="font-display text-outcome font-bold text-ink">
           {node.type === 'outcome' ? node.title : ''}
         </h1>
 
-        <p className="rounded-soft bg-card p-4 text-lead font-bold text-ink shadow-soft">
+        <p className="rounded-soft border-2 border-line-strong bg-card p-4 text-lead font-bold text-ink">
           {fmt(S.safety.emergency, { number: EMERGENCY_NUMBER })}{' '}
           <a href={`tel:${EMERGENCY_NUMBER}`} className="text-accent-ink underline decoration-2 underline-offset-4">
             {fmt(S.safety.callEmergency, { number: EMERGENCY_NUMBER })}
@@ -61,7 +61,7 @@ export function SafetyScreen({ nodeId }: { nodeId: string }) {
         <button
           type="button"
           onClick={backToStart}
-          className="w-full rounded-2xl border border-line bg-transparent px-6 py-4 text-body text-ink"
+          className="w-full rounded-2xl border-2 border-line-strong bg-transparent px-6 py-4 font-display text-body font-bold text-ink"
         >
           {S.safety.backToStart}
         </button>

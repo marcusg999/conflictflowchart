@@ -4,6 +4,7 @@ import { flow } from '../content.ts';
 import { Shell } from '../components/Shell.tsx';
 import { Trail } from '../components/Trail.tsx';
 import { ResourceChips } from '../components/ResourceChips.tsx';
+import { BackButton } from '../components/BackButton.tsx';
 import { routeFor, useSession } from '../state/SessionProvider.tsx';
 import { composeShareText } from '../lib/share.ts';
 import { shareOrCopy, copyText } from '../lib/clipboard.ts';
@@ -11,13 +12,13 @@ import { getPrefs } from '../state/prefs.ts';
 import type { Tone } from '../schema/flow.ts';
 import { S } from '../strings.ts';
 
-const toneStyles: Record<Exclude<Tone, 'safety'>, { card: string; title: string }> = {
-  // Soft accent wash: a breath, a pause.
-  calm: { card: 'bg-accent-soft', title: 'text-ink' },
-  // Plain card, accent rule: something to go and do.
-  action: { card: 'bg-card border-l-4 border-accent', title: 'text-ink' },
-  // No colour, no flourish. Plain words, room around them.
-  hard: { card: 'bg-transparent', title: 'text-ink' },
+const toneStyles: Record<Exclude<Tone, 'safety'>, { page: string; title: string; dots: string }> = {
+  // A breath: taped page, blue halftone in the corner.
+  calm: { page: 'taped px-6 pb-8 pt-9', title: 'riso-title', dots: 'halftone-blue' },
+  // Something to go and do: taped page, coral halftone.
+  action: { page: 'taped px-6 pb-8 pt-9', title: 'riso-title', dots: 'halftone-coral' },
+  // No tape, no tilt, no second plate. Plain words, room around them.
+  hard: { page: 'py-12', title: 'font-display font-bold text-ink', dots: '' },
 };
 
 export function OutcomeScreen({ nodeId }: { nodeId: string }) {
@@ -56,11 +57,11 @@ export function OutcomeScreen({ nodeId }: { nodeId: string }) {
   };
 
   return (
-    <Shell>
-      <Trail />
-      <main className="screen-in flex flex-1 flex-col" aria-labelledby={`o-${nodeId}`}>
-        <div className={`mt-6 flex flex-col gap-4 rounded-soft ${isHard ? 'py-10' : 'p-6 shadow-soft'} ${tone.card}`}>
-          <h1 id={`o-${nodeId}`} ref={heading} tabIndex={-1} className={`text-outcome font-bold ${tone.title}`}>
+    <Shell left={<BackButton />}>
+      <main className="flex flex-1 flex-col" aria-labelledby={`o-${nodeId}`}>
+        <div className={`relative mt-8 flex flex-col gap-4 overflow-visible ${isHard ? '' : 'stamp'} ${tone.page}`}>
+          {tone.dots && <div aria-hidden="true" className={`absolute -bottom-3 -right-3 h-20 w-28 -z-10 ${tone.dots}`} />}
+          <h1 id={`o-${nodeId}`} ref={heading} tabIndex={-1} className={`text-outcome ${tone.title}`}>
             {node.title}
           </h1>
           {node.body && <p className="text-lead text-ink">{node.body}</p>}
@@ -77,7 +78,7 @@ export function OutcomeScreen({ nodeId }: { nodeId: string }) {
             <button
               type="button"
               onClick={() => keepGoing(node.continue!)}
-              className="min-h-16 w-full rounded-soft bg-accent px-6 py-4 text-lead font-bold text-on-accent shadow-soft"
+              className="sticker sticker-blue min-h-16 w-full px-6 py-4 font-display text-lead font-bold"
             >
               {S.outcome.continue}
             </button>
@@ -86,27 +87,30 @@ export function OutcomeScreen({ nodeId }: { nodeId: string }) {
               <button
                 type="button"
                 onClick={share}
-                className="min-h-16 w-full rounded-soft border-2 border-line bg-card px-6 py-4 text-lead font-bold text-ink shadow-soft"
+                className={`${isHard ? 'rounded-soft border-2 border-line-strong bg-card' : 'sticker'} min-h-16 w-full px-6 py-4 font-display text-lead font-bold text-ink`}
               >
                 {S.outcome.share}
               </button>
               <p role="status" className="min-h-6 text-small text-ink-soft">
                 {status}
               </p>
-              <button type="button" onClick={startOver} className="mt-4 self-center rounded-lg px-3 py-2 text-body text-ink-soft underline underline-offset-4">
+              <button type="button" onClick={startOver} className="mt-4 self-center rounded-lg px-3 py-2 text-body text-ink-soft underline decoration-coral decoration-2 underline-offset-4">
                 {S.outcome.startOver}
               </button>
             </>
           )}
         </div>
       </main>
-      {node.continue && (
-        <footer className="mt-8 flex justify-center">
-          <button type="button" onClick={putDown} className="rounded-lg px-3 py-2 text-small text-ink-soft underline-offset-4 hover:underline">
+      <footer className="mt-8 flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
+        <div className="min-w-0 flex-1">
+          <Trail />
+        </div>
+        {node.continue && (
+          <button type="button" onClick={putDown} className="rounded-lg px-1 py-1.5 text-small text-ink-soft underline decoration-coral decoration-2 underline-offset-4">
             {S.question.putDown}
           </button>
-        </footer>
-      )}
+        )}
+      </footer>
     </Shell>
   );
 }
@@ -123,7 +127,7 @@ function Stems({ stems }: { stems: string[] }) {
             <button
               type="button"
               onClick={async () => setCopied((await copyText(stem)) ? i : null)}
-              className="w-full rounded-xl border border-line bg-card px-4 py-3 text-left text-body"
+              className="sticker w-full px-4 py-3 text-left text-body"
             >
               “{stem}”
               {copied === i && <span className="ml-2 text-small text-ink-soft">{S.common.copied}</span>}

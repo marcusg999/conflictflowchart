@@ -119,11 +119,11 @@ export function BreathingExercise({
       <div className="relative aspect-square w-[min(72vw,300px)]" aria-hidden="true">
         {id === 'box-breathing' && (
           <>
-            <div className="absolute inset-[4%] rounded-[8%] border-2 border-line" />
+            <div className="absolute inset-[4%] rounded-[8%] border-[3px] border-dashed border-blue opacity-60" />
             {!reduced && (
               <div className="absolute inset-[4%]">
                 <div ref={dot} className="absolute left-1/2 top-1/2 h-0 w-full" style={{ willChange: 'transform' }}>
-                  <span className="absolute -left-2 -top-2 h-4 w-4 rounded-full bg-accent" />
+                  <span className="absolute -left-2.5 -top-2.5 h-5 w-5 rounded-full border-2 border-line-strong bg-coral" />
                 </div>
               </div>
             )}
@@ -140,7 +140,7 @@ export function BreathingExercise({
         </div>
       </div>
 
-      <p className="text-center text-question font-bold text-ink" aria-hidden="true">
+      <p className="riso-title text-center text-question" aria-hidden="true">
         {S.exercise.cues[cue]}
       </p>
       {/* Polite announcements for screen readers on each phase change. */}

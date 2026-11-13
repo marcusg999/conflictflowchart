@@ -7,6 +7,7 @@ import { S } from '../strings.ts';
 /**
  * Always on screen. Clears the session from memory first (synchronously),
  * then leaves via location.replace() so there is no back-button trail.
+ * Deliberately not playful: solid ink, no tilt, no second plate.
  */
 export function QuickExit({ prominent = false }: { prominent?: boolean }) {
   const { clearMemory } = useSession();
@@ -22,8 +23,8 @@ export function QuickExit({ prominent = false }: { prominent?: boolean }) {
       aria-describedby={hintId}
       className={
         prominent
-          ? 'w-full rounded-2xl bg-ink px-6 py-4 text-lead font-bold text-paper shadow-soft active:scale-[0.99]'
-          : 'rounded-full border-2 border-ink bg-card px-4 py-2 text-small font-bold text-ink shadow-soft active:scale-[0.98]'
+          ? 'w-full rounded-2xl bg-ink px-6 py-4 font-display text-lead font-bold text-paper'
+          : 'rounded-full bg-ink px-4 py-2 font-display text-small font-bold tracking-wide text-paper'
       }
     >
       {S.quickExit.label}

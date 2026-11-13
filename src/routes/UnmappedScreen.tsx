@@ -7,7 +7,7 @@ export function UnmappedScreen() {
   return (
     <Shell>
       <main className="flex flex-1 flex-col justify-center gap-6">
-        <h1 className="text-question font-bold">{S.outcome.unmapped}</h1>
+        <h1 className="riso-question text-question">{S.outcome.unmapped}</h1>
         <Link to="/" replace className="text-body text-accent-ink underline underline-offset-4">
           {S.outcome.startOver}
         </Link>

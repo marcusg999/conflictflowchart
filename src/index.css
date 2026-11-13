@@ -1,6 +1,11 @@
 @import "tailwindcss";
 
-/* Atkinson Hyperlegible Next — designed for legibility. Self-hosted (SIL OFL, see assets/fonts). */
+/* ---------------------------------------------------------------------------
+ * Risograph zine. Two flat inks — blue and coral — on cream newsprint, laid
+ * down slightly out of register. Playful in the details, calm in the reading.
+ * Fonts are self-hosted (SIL OFL, see assets/fonts).
+ * ------------------------------------------------------------------------- */
+
 @font-face {
   font-family: "Atkinson Hyperlegible Next";
   font-style: normal;
@@ -15,75 +20,104 @@
   font-weight: 200 800;
   src: url("./assets/fonts/atkinson-hyperlegible-next-latin-wght-italic.woff2") format("woff2-variations");
 }
+/* Display: Bricolage Grotesque, variable weight + width. */
+@font-face {
+  font-family: "Bricolage";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  font-stretch: 75% 100%;
+  src: url("./assets/fonts/bricolage-grotesque-latin-standard-normal.woff2") format("woff2-variations");
+}
 
 /*
- * Colour tokens. One accent (deep teal), used sparingly.
- * All text pairs meet WCAG AA in both themes (checked in tests/contrast.test.ts).
+ * Tokens. Text pairs meet WCAG AA in both themes (tests/contrast.test.ts).
+ * Coral is decoration and second-plate only — never body text on paper.
  */
 :root {
   color-scheme: light dark;
-  --paper: #f7f2ea;
-  --paper-deep: #efe7db;
-  --card: #fffdf9;
-  --ink: #2a2622;
-  --ink-soft: #5c544b;
-  --line: #e2d8c9;
-  --accent: #2c6762;
-  --on-accent: #ffffff;
-  --accent-soft: #e2ecea;
-  --accent-ink: #24524e;
-  --shadow: 0 1px 2px rgb(60 45 30 / 0.06), 0 6px 20px rgb(60 45 30 / 0.07);
-  /* Breathing orb: warm at the bottom of the breath, cool and brighter at the top. */
-  --orb-warm: radial-gradient(circle at 50% 45%, #fde9d3 0%, #f4c8a2 36%, rgb(238 178 134 / 0.5) 56%, rgb(238 178 134 / 0) 71%);
-  --orb-cool: radial-gradient(circle at 50% 45%, #fffefb 0%, #f6e6d6 36%, rgb(232 214 196 / 0.55) 56%, rgb(232 214 196 / 0) 71%);
-  --ambient: radial-gradient(60% 50% at 30% 30%, #f1e2cf 0%, transparent 70%), radial-gradient(55% 45% at 70% 70%, #e1ece9 0%, transparent 70%);
+  --paper: #f4eddf;
+  --paper-deep: #ebe2cf;
+  --card: #fbf7ee;
+  --ink: #2b2846; /* blue × coral overprint */
+  --ink-soft: #4f4a6b;
+  --line: #2b2846;
+  --line-soft: #d8ccb4;
+  --blue: #2d4fa8;
+  --coral: #ff7f6a;
+  --coral-soft: #ffd9cf;
+  --blue-soft: #dbe1f2;
+  --accent: #2d4fa8;
+  --on-accent: #fbf7ee;
+  --accent-soft: #dbe1f2;
+  --accent-ink: #2d4fa8;
+  --plate: #ff7f6a; /* the misregistered second plate */
+  --tape: rgb(255 127 106 / 0.38);
+  --shadow: 4px 4px 0 var(--coral);
+  --orb-warm: radial-gradient(circle at 50% 45%, #ffe3da 0%, #ffb3a4 40%, rgb(255 127 106 / 0.55) 60%, rgb(255 127 106 / 0) 71%);
+  --orb-cool: radial-gradient(circle at 50% 45%, #f2f4fb 0%, #b9c6ec 40%, rgb(45 79 168 / 0.35) 60%, rgb(45 79 168 / 0) 71%);
+  --ambient: radial-gradient(60% 50% at 25% 30%, #ffe1d8 0%, transparent 70%), radial-gradient(55% 45% at 75% 70%, #dfe5f5 0%, transparent 70%);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #1b1916;
-    --paper-deep: #15130f;
-    --card: #26231f;
-    --ink: #eee7dc;
-    --ink-soft: #b9b0a3;
-    --line: #3b362f;
-    --accent: #8cc7be;
-    --on-accent: #10201e;
-    --accent-soft: #233532;
-    --accent-ink: #a6d6ce;
-    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 6px 20px rgb(0 0 0 / 0.25);
-    --orb-warm: radial-gradient(circle at 50% 45%, #f2c8a0 0%, #c9845a 36%, rgb(170 105 68 / 0.45) 56%, rgb(170 105 68 / 0) 71%);
-    --orb-cool: radial-gradient(circle at 50% 45%, #fff6ea 0%, #e8c3a0 36%, rgb(214 170 130 / 0.45) 56%, rgb(214 170 130 / 0) 71%);
-    --ambient: radial-gradient(60% 50% at 30% 30%, #2a241d 0%, transparent 70%), radial-gradient(55% 45% at 70% 70%, #1d2a28 0%, transparent 70%);
+    --paper: #16182c;
+    --paper-deep: #10121f;
+    --card: #1f2238;
+    --ink: #f4eddf;
+    --ink-soft: #bdb8d2;
+    --line: #f4eddf;
+    --line-soft: #3a3e62;
+    --blue: #93a8f5;
+    --coral: #ff9a88;
+    --coral-soft: #3d2533;
+    --blue-soft: #232b55;
+    --accent: #93a8f5;
+    --on-accent: #121428;
+    --accent-soft: #232b55;
+    --accent-ink: #a9baf8;
+    --plate: #ff9a88;
+    --tape: rgb(255 154 136 / 0.3);
+    --orb-warm: radial-gradient(circle at 50% 45%, #ffd6cc 0%, #e8806d 40%, rgb(232 128 109 / 0.45) 60%, rgb(232 128 109 / 0) 71%);
+    --orb-cool: radial-gradient(circle at 50% 45%, #eef1ff 0%, #93a8f5 40%, rgb(147 168 245 / 0.4) 60%, rgb(147 168 245 / 0) 71%);
+    --ambient: radial-gradient(60% 50% at 25% 30%, #2a2033 0%, transparent 70%), radial-gradient(55% 45% at 75% 70%, #1c2448 0%, transparent 70%);
   }
 }
 
 @theme inline {
   --font-sans: "Atkinson Hyperlegible Next", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage", "Atkinson Hyperlegible Next", ui-sans-serif, sans-serif;
 
   --color-paper: var(--paper);
   --color-paper-deep: var(--paper-deep);
   --color-card: var(--card);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
-  --color-line: var(--line);
+  --color-line: var(--line-soft);
+  --color-line-strong: var(--line);
   --color-accent: var(--accent);
   --color-on-accent: var(--on-accent);
   --color-accent-soft: var(--accent-soft);
   --color-accent-ink: var(--accent-ink);
+  --color-blue: var(--blue);
+  --color-coral: var(--coral);
+  --color-coral-soft: var(--coral-soft);
+  --color-blue-soft: var(--blue-soft);
 
-  /* Type scale: 16 / 18 (body) / 21 / 28 (question) / 34 (outcome) */
+  /* Type scale: 16 / 18 (body) / 21 / 30 (question) / 36 (outcome) / 46 (hero) */
   --text-small: 1rem;
   --text-small--line-height: 1.45;
   --text-body: 1.125rem;
   --text-body--line-height: 1.5;
   --text-lead: 1.3125rem;
-  --text-lead--line-height: 1.45;
-  --text-question: 1.75rem;
-  --text-question--line-height: 1.3;
-  --text-outcome: 2.125rem;
-  --text-outcome--line-height: 1.25;
+  --text-lead--line-height: 1.4;
+  --text-question: 1.875rem;
+  --text-question--line-height: 1.12;
+  --text-outcome: 2.25rem;
+  --text-outcome--line-height: 1.05;
+  --text-hero: 2.875rem;
+  --text-hero--line-height: 0.95;
 
-  --radius-soft: 1.25rem;
+  --radius-soft: 1.1rem;
   --shadow-soft: var(--shadow);
 }
 
@@ -94,7 +128,7 @@
   }
   body {
     margin: 0;
-    background: var(--paper);
+    background-color: var(--paper);
     color: var(--ink);
     font-family: var(--font-sans);
     font-size: var(--text-body);
@@ -102,25 +136,152 @@
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
   }
+  /* Newsprint grain over everything (a static texture, never animated). */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    background-image: url("./assets/paper-grain.png");
+    background-size: 192px;
+    opacity: 0.55;
+    mix-blend-mode: multiply;
+  }
+  @media (prefers-color-scheme: dark) {
+    body::before { mix-blend-mode: screen; opacity: 0.18; }
+  }
   :focus-visible {
-    outline: 3px solid var(--accent);
+    outline: 3px solid var(--blue);
     outline-offset: 3px;
-    border-radius: 0.5rem;
+    border-radius: 0.6rem;
   }
   ::selection {
-    background: var(--accent-soft);
+    background: var(--coral-soft);
   }
 }
 
-/* Gentle cross-fade between screens. */
+@layer components {
+/* ---- Display type: printed in blue with a coral plate slightly off register. */
+.riso-title {
+  font-family: var(--font-display);
+  font-weight: 760;
+  font-stretch: 80%;
+  letter-spacing: -0.01em;
+  color: var(--blue);
+  text-shadow: 0.055em 0.04em 0 var(--plate);
+  text-wrap: balance;
+}
+/* Questions: same face, quieter plate, so they read first and foremost. */
+.riso-question {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: 88%;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  text-shadow: 2px 1.5px 0 var(--coral-soft);
+  text-wrap: balance;
+}
+.riso-display {
+  font-family: var(--font-display);
+  font-stretch: 85%;
+}
+
+/* ---- Sticker buttons: flat ink outline, coral second plate as a hard offset. */
+.sticker {
+  position: relative;
+  border: 2.5px solid var(--line);
+  border-radius: var(--radius-soft);
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 5px 5px 0 var(--coral);
+  transition: transform 90ms ease-out, box-shadow 90ms ease-out;
+}
+.sticker:hover { box-shadow: 6px 6px 0 var(--coral); }
+.sticker:active {
+  transform: translate(4px, 4px);
+  box-shadow: 1px 1px 0 var(--coral);
+}
+.sticker-blue {
+  background: var(--blue);
+  color: var(--on-accent);
+  border-color: var(--line);
+}
+.sticker-tilt-l { rotate: -0.7deg; }
+.sticker-tilt-r { rotate: 0.6deg; }
+
+/* Small rotated label, like a tab of tape with a word on it. */
+.tab {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: 80%;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  line-height: 1;
+  padding: 0.45rem 0.7rem 0.4rem;
+  background: var(--coral-soft);
+  color: var(--ink);
+  border-radius: 0.3rem;
+  rotate: 2.5deg;
+}
+
+/* A taped-down page (outcomes). */
+.taped {
+  position: relative;
+  background: var(--card);
+  border: 2px solid var(--line);
+  rotate: -1.1deg;
+}
+.taped::before,
+.taped::after {
+  content: "";
+  position: absolute;
+  top: -0.85rem;
+  width: 5.5rem;
+  height: 1.6rem;
+  background: var(--tape);
+}
+.taped::before { left: 1.2rem; rotate: -6deg; }
+.taped::after { right: 1.2rem; rotate: 5deg; }
+
+/* Halftone dot fields (decoration only). */
+.halftone-blue {
+  background-image: radial-gradient(var(--blue) 1.1px, transparent 1.4px);
+  background-size: 7px 7px;
+}
+.halftone-coral {
+  background-image: radial-gradient(var(--coral) 1.2px, transparent 1.5px);
+  background-size: 7px 7px;
+}
+
+/* "How I got here" printed like a till receipt with a torn edge. */
+.receipt {
+  background: var(--card);
+  border-left: 2px dashed var(--line-soft);
+  border-right: 2px dashed var(--line-soft);
+  -webkit-mask: radial-gradient(circle 6px at 50% 100%, transparent 98%, #000) 0 0 / 16px 100%;
+  mask: radial-gradient(circle 6px at 50% 100%, transparent 98%, #000) 0 0 / 16px 100%;
+}
+
+}
+
+/* ---- Motion: an ink-stamp settle as things land. Short, never bouncy. */
+@keyframes stamp {
+  from { opacity: 0; transform: translate(-6px, 8px) rotate(-1.5deg); }
+  to { opacity: 1; transform: none; }
+}
+.stamp { animation: stamp 220ms cubic-bezier(0.2, 0.9, 0.3, 1) both; }
+.stamp-2 { animation-delay: 60ms; }
+.stamp-3 { animation-delay: 120ms; }
+.stamp-4 { animation-delay: 180ms; }
+
 @keyframes screen-in {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: none; }
 }
-.screen-in {
-  animation: screen-in 220ms ease-out both;
-}
-
+.screen-in { animation: screen-in 220ms ease-out both; }
 @keyframes sheet-in {
   from { transform: translateY(100%); }
   to { transform: none; }
@@ -139,16 +300,27 @@
   100% { transform: translate3d(-8%, -6%, 0) rotate(0deg); }
 }
 .drift { animation: drift 80s ease-in-out infinite; }
-/* Static fade so the drifting layer has no hard top or bottom edge. */
 .ambient-mask {
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
   mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .screen-in, .sheet-in, .fade-in, .drift {
+  .screen-in, .sheet-in, .fade-in, .drift, .stamp {
     animation: none;
   }
+  .sticker { transition: none; }
+}
+
+/* Intro: panels rise into place as they scroll into view (only when JS effects are on). */
+[data-scrolly='on'] .intro-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 520ms ease-out, transform 620ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+[data-scrolly='on'] .intro-reveal[data-shown] {
+  opacity: 1;
+  transform: none;
 }
 
 /* Numbers someone may need to read out and dial from another phone. */

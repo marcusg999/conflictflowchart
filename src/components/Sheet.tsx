@@ -75,14 +75,14 @@ export function Sheet({
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-end justify-center">
-      <div className="fade-in absolute inset-0 bg-ink/40" onClick={() => closeRef.current()} aria-hidden="true" />
+      <div className="fade-in halftone-blue absolute inset-0 bg-ink/30 opacity-90" onClick={() => closeRef.current()} aria-hidden="true" />
       <div
         ref={panel}
         role="dialog"
         aria-modal="true"
         aria-labelledby="sheet-title"
         tabIndex={-1}
-        className={`sheet-in relative flex w-full max-w-xl flex-col overflow-hidden rounded-t-[1.75rem] bg-paper shadow-soft outline-none ${
+        className={`sheet-in relative flex w-full max-w-xl flex-col overflow-hidden rounded-t-[1.75rem] border-x-2 border-t-[3px] border-line-strong bg-paper outline-none ${
           tall ? 'h-dvh rounded-t-none sm:h-[95dvh] sm:rounded-t-[1.75rem]' : 'max-h-[88dvh]'
         }`}
       >
@@ -91,12 +91,12 @@ export function Sheet({
           <button
             type="button"
             onClick={() => closeRef.current()}
-            className="rounded-full px-4 py-2 text-small font-bold text-ink-soft"
+            className="rounded-full border-2 border-line-strong bg-card px-4 py-1.5 font-display text-small font-bold text-ink"
           >
             {S.common.close}
           </button>
         </div>
-        <h2 id="sheet-title" className="px-5 pb-3 text-lead font-bold">
+        <h2 id="sheet-title" className="riso-title px-5 pb-3 text-[1.6rem] leading-tight">
           {title}
         </h2>
         <div className="flex flex-1 flex-col overflow-y-auto px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))]">{children}</div>

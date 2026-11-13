@@ -41,7 +41,8 @@
     "nameLabel": "My therapist's name (optional)",
     "nameHelp": "Only saved on this phone. Used when you share with them.",
     "continue": "Okay, I'm ready",
-    "skip": "Skip"
+    "skip": "Skip",
+    "scrollHint": "Scroll down"
   },
   "question": {
     "trailShow": "How I got here",
@@ -50,7 +51,9 @@
     "trailChange": "Change this answer",
     "trailTookBreak": "Took a break",
     "putDown": "Put this down for now",
-    "resourcesLabel": "Something that may help"
+    "resourcesLabel": "Something that may help",
+    "back": "Back",
+    "backLabel": "Go back one question"
   },
   "outcome": {
     "continue": "When you're ready, keep going",

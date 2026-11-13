@@ -13,7 +13,7 @@ import { STORAGE_KEY } from '../src/state/session.ts';
 import { resources } from '../src/content.ts';
 import { ResourceContent } from '../src/components/ResourceContent.tsx';
 
-const answer = (label: string) => fireEvent.click(screen.getByRole('button', { name: label, exact: true }));
+const answer = (label: string) => fireEvent.click(screen.getByRole('button', { name: label }));
 
 describe('safety gate', () => {
   beforeEach(() => freshDevice());

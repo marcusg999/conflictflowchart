@@ -1,0 +1,16 @@
+{
+  "//": "Content-Security-Policy, shared by vite.config.ts (meta tag in the built HTML) and netlify.toml (header). Nothing external: no connections, scripts, styles, fonts or images from anywhere but this site.",
+  "default-src": ["'self'"],
+  "script-src": ["'self'"],
+  "style-src": ["'self'"],
+  "img-src": ["'self'"],
+  "font-src": ["'self'"],
+  "connect-src": ["'self'"],
+  "manifest-src": ["'self'"],
+  "worker-src": ["'self'"],
+  "media-src": ["'none'"],
+  "object-src": ["'none'"],
+  "frame-src": ["'none'"],
+  "base-uri": ["'self'"],
+  "form-action": ["'none'"]
+}

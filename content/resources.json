@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "resources": {
+    "ipv-resources": {
+      "label": "Hotline and safety help",
+      "type": "links",
+      "intro": "Calls and websites you visit can show up in your phone's history. If someone might check your phone, think about using a friend's phone or a public computer.",
+      "hotline": true,
+      "links": [],
+      "confirmed": false,
+      "note": "Hotline numbers come from src/constants/safety.ts. The privacy line above the list is a draft and needs the therapist's review."
+    },
+    "breathing-grounding": {
+      "label": "Breathing + grounding exercises",
+      "type": "exercise",
+      "exercise": "physiological-sigh",
+      "also": [
+        "box-breathing",
+        "extended-exhale",
+        "grounding-54321"
+      ],
+      "confirmed": true
+    },
+    "find-a-therapist": {
+      "label": "Finding a therapist",
+      "type": "links",
+      "links": [
+        {
+          "kind": "web",
+          "label": "Psychology Today therapist finder",
+          "value": "https://www.psychologytoday.com/us/therapists"
+        },
+        {
+          "kind": "web",
+          "label": "Open Path Collective (lower-cost therapy)",
+          "value": "https://openpathcollective.org/"
+        },
+        {
+          "kind": "web",
+          "label": "Inclusive Therapists",
+          "value": "https://www.inclusivetherapists.com/"
+        },
+        {
+          "kind": "web",
+          "label": "AAMFT Therapist Locator (couple and family therapists)",
+          "value": "https://www.therapistlocator.net/"
+        }
+      ],
+      "confirmed": false,
+      "note": "Directory links verified to load on 2026-11-13. The therapist confirms or replaces this list."
+    },
+    "communication": {
+      "label": "Ways to talk to each other",
+      "type": "links",
+      "links": [],
+      "markdown": "content/resources/communication.md",
+      "confirmed": false,
+      "note": "The therapist supplies this list. Until then, the reading stub is shown."
+    },
+    "boundary-setting": {
+      "label": "Setting a boundary",
+      "type": "reading",
+      "markdown": "content/resources/boundary-setting.md",
+      "confirmed": false
+    },
+    "relational-wounds": {
+      "label": "Where big reactions come from",
+      "type": "reading",
+      "markdown": "content/resources/relational-wounds.md",
+      "confirmed": false
+    },
+    "trauma-responses": {
+      "label": "Understanding trauma responses",
+      "type": "links",
+      "links": [],
+      "markdown": "content/resources/trauma-responses.md",
+      "confirmed": false,
+      "note": "The therapist supplies this list. Until then, the reading stub is shown."
+    },
+    "needs-conversations": {
+      "label": "Talking about needs",
+      "type": "reading",
+      "markdown": "content/resources/needs-conversations.md",
+      "confirmed": false
+    },
+    "expectations-exercise": {
+      "label": "Checking your expectations",
+      "type": "reading",
+      "markdown": "content/resources/expectations-exercise.md",
+      "confirmed": false
+    },
+    "values": {
+      "label": "What you want in a partner",
+      "type": "reading",
+      "markdown": "content/resources/values.md",
+      "confirmed": false
+    }
+  }
+}

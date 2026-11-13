@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import { flushSync } from 'react-dom';
 import { leaveNow } from '../lib/quickExit.ts';
 import { useSession } from '../state/SessionProvider.tsx';
@@ -9,6 +10,7 @@ import { S } from '../strings.ts';
  */
 export function QuickExit({ prominent = false }: { prominent?: boolean }) {
   const { clearMemory } = useSession();
+  const hintId = useId();
   const exit = () => {
     flushSync(() => clearMemory());
     leaveNow();
@@ -17,7 +19,7 @@ export function QuickExit({ prominent = false }: { prominent?: boolean }) {
     <button
       type="button"
       onClick={exit}
-      aria-describedby="quick-exit-hint"
+      aria-describedby={hintId}
       className={
         prominent
           ? 'w-full rounded-2xl bg-ink px-6 py-4 text-lead font-bold text-paper shadow-soft active:scale-[0.99]'
@@ -25,8 +27,8 @@ export function QuickExit({ prominent = false }: { prominent?: boolean }) {
       }
     >
       {S.quickExit.label}
-      <span id="quick-exit-hint" className="sr-only">
-        {' '}
+      {/* Referenced by aria-describedby: read as a description, not as part of the name. */}
+      <span id={hintId} hidden>
         {S.quickExit.hint}
       </span>
     </button>

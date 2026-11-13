@@ -3,8 +3,10 @@ import type { Resources } from '../schema/resources.ts';
 import { cycles, edgesOf, orphans, unreachable } from './graph.ts';
 import { S, fmt } from '../strings.ts';
 
+/** How a node reads in review. Outcomes include their body so the three "Do it." cards are told apart. */
 export function said(node: FlowNode): string {
-  return node.type === 'question' ? node.prompt : node.title;
+  if (node.type === 'question') return node.prompt;
+  return node.body ? `${node.title} ${node.body}` : node.title;
 }
 
 /** A loop described in words: "A" → Yes → "B" → No → back to "A". */

@@ -60,8 +60,8 @@ export function ExerciseHost({ first, also, onDone }: { first: ExerciseId; also:
   return (
     <div className="relative isolate flex flex-1 flex-col">
       {breathing && !reduced && (
-        <div aria-hidden="true" className="pointer-events-none absolute inset-[-30%] -z-10 overflow-hidden">
-          <div className="drift h-full w-full" style={{ background: 'var(--ambient)' }} />
+        <div aria-hidden="true" className="ambient-mask pointer-events-none absolute inset-y-0 -inset-x-5 -z-10 overflow-hidden">
+          <div className="drift absolute inset-[-30%]" style={{ background: 'var(--ambient)' }} />
         </div>
       )}
 

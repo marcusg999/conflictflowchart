@@ -139,6 +139,11 @@
   100% { transform: translate3d(-8%, -6%, 0) rotate(0deg); }
 }
 .drift { animation: drift 80s ease-in-out infinite; }
+/* Static fade so the drifting layer has no hard top or bottom edge. */
+.ambient-mask {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+}
 
 @media (prefers-reduced-motion: reduce) {
   .screen-in, .sheet-in, .fade-in, .drift {

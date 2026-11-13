@@ -58,11 +58,11 @@ export function Home() {
   return (
     <Shell showAbout>
       <main className="flex flex-1 flex-col" aria-labelledby="home-title">
-        <RisoMapHero className="-mx-5 -mt-4 h-[44vh] max-h-[26rem] min-h-64" />
+        <RisoMapHero className="-mx-5 -mt-2 h-[54vh] max-h-[34rem] min-h-64" />
 
-        <h1 id="home-title" ref={heading} tabIndex={-1} className="relative -mt-14 flex flex-col">
+        <h1 id="home-title" ref={heading} tabIndex={-1} className="relative -mt-16 flex flex-col">
           <span className="stamp ml-1 font-display text-lead font-bold text-ink">{S.home.title}</span>
-          <span className="riso-title stamp stamp-2 relative -ml-1 mt-1 inline-block self-start text-hero">
+          <span className="riso-title stamp stamp-2 relative -ml-1.5 mt-1 inline-block self-start text-hero">
             {S.home.titleLine2}
             <Squiggle className="absolute -bottom-3 left-[38%] h-3 w-[58%] text-coral" />
           </span>

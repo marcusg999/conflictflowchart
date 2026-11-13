@@ -36,17 +36,17 @@ export function QuestionScreen({ nodeId }: { nodeId: string }) {
   return (
     <Shell left={<BackButton />}>
       <main className="flex flex-1 flex-col" aria-labelledby={`q-${nodeId}`}>
-        <div className="relative pt-7">
+        <div className="relative pt-10">
           {phase && (
-            <p className="stamp absolute right-0 top-2">
-              <span className="tab">{phase.title}</span>
+            <p className="stamp ml-[12%]">
+              <span className="tab -rotate-2">{phase.title}</span>
             </p>
           )}
           <h1
             id={`q-${nodeId}`}
             ref={heading}
             tabIndex={-1}
-            className="riso-question stamp stamp-2 -ml-0.5 mt-6 pr-6 text-question"
+            className="riso-question stamp stamp-2 -ml-0.5 mt-4 pr-4 text-question"
           >
             {node.prompt}
           </h1>

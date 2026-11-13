@@ -55,7 +55,7 @@
   --tape: rgb(255 127 106 / 0.38);
   --shadow: 4px 4px 0 var(--coral);
   --orb-warm: radial-gradient(circle at 50% 45%, #ffe3da 0%, #ffb3a4 40%, rgb(255 127 106 / 0.55) 60%, rgb(255 127 106 / 0) 71%);
-  --orb-cool: radial-gradient(circle at 50% 45%, #f2f4fb 0%, #b9c6ec 40%, rgb(45 79 168 / 0.35) 60%, rgb(45 79 168 / 0) 71%);
+  --orb-cool: radial-gradient(circle at 50% 45%, #fffdf8 0%, #ffe7df 40%, rgb(255 205 190 / 0.5) 60%, rgb(255 205 190 / 0) 71%);
   --ambient: radial-gradient(60% 50% at 25% 30%, #ffe1d8 0%, transparent 70%), radial-gradient(55% 45% at 75% 70%, #dfe5f5 0%, transparent 70%);
 }
 @media (prefers-color-scheme: dark) {
@@ -78,7 +78,7 @@
     --plate: #ff9a88;
     --tape: rgb(255 154 136 / 0.3);
     --orb-warm: radial-gradient(circle at 50% 45%, #ffd6cc 0%, #e8806d 40%, rgb(232 128 109 / 0.45) 60%, rgb(232 128 109 / 0) 71%);
-    --orb-cool: radial-gradient(circle at 50% 45%, #eef1ff 0%, #93a8f5 40%, rgb(147 168 245 / 0.4) 60%, rgb(147 168 245 / 0) 71%);
+    --orb-cool: radial-gradient(circle at 50% 45%, #fff4ee 0%, #ffc2b5 40%, rgb(255 170 150 / 0.45) 60%, rgb(255 170 150 / 0) 71%);
     --ambient: radial-gradient(60% 50% at 25% 30%, #2a2033 0%, transparent 70%), radial-gradient(55% 45% at 75% 70%, #1c2448 0%, transparent 70%);
   }
 }
@@ -110,12 +110,12 @@
   --text-body--line-height: 1.5;
   --text-lead: 1.3125rem;
   --text-lead--line-height: 1.4;
-  --text-question: 1.875rem;
-  --text-question--line-height: 1.12;
+  --text-question: 2.25rem;
+  --text-question--line-height: 1.06;
   --text-outcome: 2.25rem;
   --text-outcome--line-height: 1.05;
-  --text-hero: 2.875rem;
-  --text-hero--line-height: 0.95;
+  --text-hero: 4.75rem;
+  --text-hero--line-height: 0.9;
 
   --radius-soft: 1.1rem;
   --shadow-soft: var(--shadow);
@@ -144,12 +144,16 @@
     z-index: 60;
     pointer-events: none;
     background-image: url("./assets/paper-grain.png");
-    background-size: 192px;
-    opacity: 0.55;
+    background-size: 160px;
+    opacity: 0.4;
     mix-blend-mode: multiply;
   }
   @media (prefers-color-scheme: dark) {
-    body::before { mix-blend-mode: screen; opacity: 0.18; }
+    body::before { mix-blend-mode: screen; opacity: 0.12; }
+  }
+  /* Headings receive focus programmatically (so screen readers announce them); no ring for that. */
+  [tabindex='-1']:focus {
+    outline: none;
   }
   :focus-visible {
     outline: 3px solid var(--blue);

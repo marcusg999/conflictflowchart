@@ -59,12 +59,15 @@ export function OutcomeScreen({ nodeId }: { nodeId: string }) {
   return (
     <Shell left={<BackButton />}>
       <main className="flex flex-1 flex-col" aria-labelledby={`o-${nodeId}`}>
-        <div className={`relative mt-8 flex flex-col gap-4 overflow-visible ${isHard ? '' : 'stamp'} ${tone.page}`}>
-          {tone.dots && <div aria-hidden="true" className={`absolute -bottom-3 -right-3 h-20 w-28 -z-10 ${tone.dots}`} />}
-          <h1 id={`o-${nodeId}`} ref={heading} tabIndex={-1} className={`text-outcome ${tone.title}`}>
-            {node.title}
-          </h1>
-          {node.body && <p className="text-lead text-ink">{node.body}</p>}
+        <div className={`relative isolate mt-8 ${isHard ? '' : 'stamp'}`}>
+          {/* Halftone patch printed on the page behind the card (a separate plate). */}
+          {tone.dots && <div aria-hidden="true" className={`absolute -bottom-4 -right-3 -z-10 h-24 w-32 ${tone.dots}`} />}
+          <div className={`flex flex-col gap-4 ${tone.page}`}>
+            <h1 id={`o-${nodeId}`} ref={heading} tabIndex={-1} className={`text-outcome ${tone.title}`}>
+              {node.title}
+            </h1>
+            {node.body && <p className="text-lead text-ink">{node.body}</p>}
+          </div>
         </div>
 
         {node.stems && node.stems.length > 0 && <Stems stems={node.stems} />}

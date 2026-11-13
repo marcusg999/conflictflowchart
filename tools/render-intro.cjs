@@ -36,7 +36,7 @@ const ease = (p) => 0.5 - 0.5 * Math.cos(Math.PI * p);
     for (let i = 0; i < FRAMES; i++) {
       const p = ease(i / (FRAMES - 1));
       // Starts folded shut and turned away; opens flat and turns toward you.
-      await shot(path.join(dir, `${String(i).padStart(2, '0')}.webp`), 1.18 - 1.1 * p, -0.75 + 0.95 * p);
+      await shot(path.join(dir, `${String(i).padStart(2, '0')}.webp`), 0.95 - 0.87 * p, -0.28 + 0.48 * p);
     }
     await shot(path.join(out, `map-${theme}.webp`), 0.42, 0.2);
   }

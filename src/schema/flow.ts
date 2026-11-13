@@ -46,6 +46,8 @@ export const outcomeNodeSchema = z.strictObject({
   body: text.optional(),
   tone: toneSchema,
   continue: nodeId.optional(),
+  /** Optional opening phrases the therapist writes, shown as tappable, copyable lines. */
+  stems: z.array(text).optional(),
 });
 
 export const nodeSchema = z.discriminatedUnion('type', [questionNodeSchema, outcomeNodeSchema]);

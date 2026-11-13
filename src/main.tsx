@@ -1,14 +1,16 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router';
 import './index.css';
-
-// Placeholder shell — the UI is built after the graph-integrity step is approved.
-function App() {
-  return <main className="p-6">Scaffold.</main>;
-}
+import { SessionProvider } from './state/SessionProvider.tsx';
+import { AppRoutes } from './App.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+      <SessionProvider>
+        <AppRoutes />
+      </SessionProvider>
+    </BrowserRouter>
   </StrictMode>,
 );

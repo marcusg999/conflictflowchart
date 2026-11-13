@@ -1,0 +1,163 @@
+{
+  "app": {
+    "name": "So You're In Conflict. Now What?",
+    "shortName": "Now What?"
+  },
+  "quickExit": {
+    "label": "Quick exit",
+    "hint": "Leaves this app right away and opens a weather page."
+  },
+  "common": {
+    "about": "About",
+    "close": "Close",
+    "back": "Back",
+    "copied": "Copied.",
+    "copyFailed": "Couldn't copy. You can select the text and copy it yourself."
+  },
+  "home": {
+    "title": "So you're in conflict.",
+    "titleLine2": "Now what?",
+    "lede": "One question at a time. Take your time.",
+    "start": "Start",
+    "therapistLine": "This is the map {name} uses with you.",
+    "resumeTitle": "You stopped partway last time.",
+    "resume": "Pick up where you left off",
+    "startFresh": "Start fresh",
+    "keepGoing": "Keep going",
+    "startOver": "Start over",
+    "putDownTitle": "Okay. You can put this down.",
+    "putDownBody": "Your place is saved on this phone. Come back when you're ready."
+  },
+  "intro": {
+    "eyebrow": "Before you start",
+    "whatTitle": "What this is",
+    "whatBody": "The map your therapist uses with you. It's for the moment you're in it.",
+    "whatTherapist": "It's the map {name} uses with you. It's for the moment you're in it.",
+    "notTitle": "What this isn't",
+    "notBody": "This is not therapy. It is not advice. It is not a crisis service.",
+    "dangerTitle": "If you are in danger",
+    "privacyTitle": "Private",
+    "privacyBody": "Nothing you tap leaves this phone.",
+    "nameLabel": "My therapist's name (optional)",
+    "nameHelp": "Only saved on this phone. Used when you share with them.",
+    "continue": "Okay, I'm ready",
+    "skip": "Skip"
+  },
+  "question": {
+    "trailShow": "How I got here",
+    "trailHide": "Hide how I got here",
+    "trailEmpty": "This is the first question.",
+    "trailChange": "Change this answer",
+    "trailTookBreak": "Took a break",
+    "putDown": "Put this down for now",
+    "resourcesLabel": "Something that may help"
+  },
+  "outcome": {
+    "continue": "When you're ready, keep going",
+    "share": "Share with my therapist",
+    "startOver": "Start over",
+    "stemsTitle": "Ways to start",
+    "stemsHelp": "Tap one to copy it.",
+    "unmapped": "This path isn't mapped yet — bring it to your next session."
+  },
+  "share": {
+    "title": "From my conflict map",
+    "forName": "For {name}",
+    "forTherapist": "For my therapist",
+    "howIGotHere": "How I got here:",
+    "tookBreak": "I took a break here",
+    "landed": "Where I landed:",
+    "stopped": "Where I stopped:",
+    "wentBack": "Questions I went back to and changed:",
+    "copiedFallback": "Copied. You can paste it into a message to your therapist."
+  },
+  "safety": {
+    "callLabel": "Call the {name}",
+    "textLabel": "Text the hotline",
+    "chatLabel": "Chat live with the hotline",
+    "emergency": "In immediate danger, call {number}.",
+    "callEmergency": "Call {number}",
+    "numberToDial": "Number to dial",
+    "backToStart": "Back to the start"
+  },
+  "resource": {
+    "notWritten": "Your therapist hasn't written this part yet. Bring it to your next session.",
+    "noLinksYet": "Your therapist hasn't added these links yet. Bring it to your next session.",
+    "opensNewTab": "(opens in a new tab)"
+  },
+  "exercise": {
+    "ready": "I'm ready",
+    "trySomethingElse": "Try something else",
+    "soundTitle": "Sound or quiet?",
+    "soundBody": "Some exercises have soft sound. You can change this later.",
+    "soundOn": "Sound on",
+    "soundOff": "Keep it quiet",
+    "mute": "Turn sound off",
+    "unmute": "Turn sound on",
+    "hapticsOn": "Vibrate on each step: on",
+    "hapticsOff": "Vibrate on each step: off",
+    "iosHint": "No sound? Check the switch on the side of your phone.",
+    "names": {
+      "physiological-sigh": "Double breath in, long breath out",
+      "box-breathing": "Box breathing",
+      "extended-exhale": "Long breath out",
+      "grounding-54321": "Notice what's around you"
+    },
+    "cues": {
+      "in": "Breathe in…",
+      "in2": "A little more in…",
+      "hold": "Hold…",
+      "out": "Out, slowly…",
+      "rest": "Rest…"
+    },
+    "grounding": {
+      "tapToContinue": "Tap anywhere when you're ready for the next one.",
+      "again": "Go through again",
+      "steps": [
+        "Look around. Find five things you can see.",
+        "Find four things you can feel.",
+        "Listen. Find three things you can hear.",
+        "Find two things you can smell.",
+        "Find one thing you can taste."
+      ]
+    }
+  },
+  "about": {
+    "title": "About",
+    "readIntro": "Read the introduction again",
+    "settingsTitle": "Settings",
+    "soundLabel": "Sound in breathing exercises",
+    "soundOn": "On",
+    "soundOff": "Off",
+    "soundUnset": "Ask me first",
+    "deleteTitle": "Delete everything",
+    "deleteBody": "This erases everything on this device: your place, your settings, and your therapist's name.",
+    "deleteButton": "Delete everything",
+    "deleteConfirm": "Yes, erase everything",
+    "deleteCancel": "Keep it",
+    "deleted": "Everything on this device has been erased.",
+    "privacy": "Nothing you tap leaves this phone. There are no accounts and no tracking.",
+    "back": "Back"
+  },
+  "review": {
+    "title": "Review the map",
+    "intro": "Every question, every answer, and where it goes. Highlighted items are guesses from the photographed chart. Send corrections back using “Copy as text”.",
+    "copy": "Copy as text",
+    "attention": "Needs an answer",
+    "noInbound": "Nothing leads to these questions:",
+    "unreachable": "Can't be reached from the start ({count}):",
+    "loops": "Loops (someone giving these answers goes round in a circle):",
+    "goesTo": "goes to",
+    "continuesTo": "Continues to",
+    "ending": "Ending — the walk stops here.",
+    "help": "Clarifier",
+    "body": "Text",
+    "tone": "Tone",
+    "resources": "Resources",
+    "stems": "Sentence starters",
+    "unconfirmed": "Unconfirmed",
+    "resourcesTitle": "Resources",
+    "headerText": "CONFLICT MAP — REVIEW (flow.json version {version})",
+    "noIssues": "Nothing needs an answer."
+  }
+}

@@ -7,7 +7,14 @@ import type { Flow } from '../schema/flow.ts';
  * moved on from an outcome that continues (e.g. "Take a few moments to breathe").
  */
 export type PathEntry = { nodeId: string; choiceLabel: string | null };
-export type SessionState = { path: PathEntry[] };
+export type SessionState = {
+  path: PathEntry[];
+  /**
+   * Questions the person went back to and changed (clinically interesting).
+   * Never includes anything from the safety phase.
+   */
+  revised?: string[];
+};
 
 export type SessionAction =
   | { type: 'answer'; nodeId: string; choiceLabel: string }
@@ -73,22 +80,28 @@ export function sessionReducer(flow: Flow) {
         const node = here ? flow.nodes[here] : undefined;
         if (here !== action.nodeId || node?.type !== 'question') return state;
         if (!node.choices.some((c) => c.label === action.choiceLabel)) return state;
-        return { path: [...state.path, { nodeId: action.nodeId, choiceLabel: action.choiceLabel }] };
+        return { ...state, path: [...state.path, { nodeId: action.nodeId, choiceLabel: action.choiceLabel }] };
       }
       case 'continue': {
         const here = walk(flow, state);
         const node = here ? flow.nodes[here] : undefined;
         if (here !== action.nodeId || node?.type !== 'outcome' || !node.continue) return state;
-        return { path: [...state.path, { nodeId: action.nodeId, choiceLabel: null }] };
+        return { ...state, path: [...state.path, { nodeId: action.nodeId, choiceLabel: null }] };
       }
       case 'rewind': {
         if (action.index < 0 || action.index >= state.path.length) return state;
-        return { path: state.path.slice(0, action.index) };
+        const nodeId = state.path[action.index]!.nodeId;
+        const revised = state.revised ?? [];
+        const track = flow.nodes[nodeId]?.phase !== 'safety' && !revised.includes(nodeId);
+        return {
+          path: state.path.slice(0, action.index),
+          revised: track ? [...revised, nodeId] : revised,
+        };
       }
       case 'reset':
         return EMPTY;
       case 'restore':
-        return walk(flow, action.state) === null ? state : action.state;
+        return walk(flow, action.state) === null || touchesSafetyBranch(flow, action.state) ? state : action.state;
     }
   };
 }
@@ -107,12 +120,14 @@ function defaultStore(): KeyValueStore | null {
 /**
  * Save the session. On the safety branch this writes NOTHING — not the path,
  * not a flag, not a cleared value. Storage stays exactly as it was.
+ * An empty path is not written either; clearing a saved session only happens
+ * through an explicit resetSession() ("Start fresh", "Start over", Quick Exit,
+ * "Delete everything").
  */
 export function persistSession(flow: Flow, state: SessionState, store = defaultStore()): void {
-  if (!store || touchesSafetyBranch(flow, state)) return;
+  if (!store || state.path.length === 0 || touchesSafetyBranch(flow, state)) return;
   try {
-    if (state.path.length === 0) store.removeItem(STORAGE_KEY);
-    else store.setItem(STORAGE_KEY, JSON.stringify(state));
+    store.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch {
     // Storage full or blocked: the app keeps working, it just can't resume.
   }
@@ -137,7 +152,10 @@ export function loadSession(flow: Flow, store = defaultStore()): SessionState | 
     const parsed: unknown = JSON.parse(raw);
     if (!isSessionState(parsed) || parsed.path.length === 0) return null;
     if (walk(flow, parsed) === null || touchesSafetyBranch(flow, parsed)) return null;
-    return parsed;
+    const revised = (parsed.revised ?? []).filter(
+      (id) => id in flow.nodes && flow.nodes[id]!.phase !== 'safety',
+    );
+    return { path: parsed.path, revised };
   } catch {
     return null;
   }
@@ -154,6 +172,8 @@ export function resetSession(store = defaultStore()): void {
 
 function isSessionState(v: unknown): v is SessionState {
   if (typeof v !== 'object' || v === null || !Array.isArray((v as SessionState).path)) return false;
+  const revised = (v as SessionState).revised;
+  if (revised !== undefined && !(Array.isArray(revised) && revised.every((r) => typeof r === 'string'))) return false;
   return (v as SessionState).path.every(
     (e) =>
       typeof e === 'object' &&

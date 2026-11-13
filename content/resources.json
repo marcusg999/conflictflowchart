@@ -4,24 +4,50 @@
     "ipv-resources": {
       "label": "Hotline and safety help",
       "type": "links",
+      "intro": "Calls and websites you visit can show up in your phone's history. If someone might check your phone, think about using a friend's phone or a public computer.",
       "hotline": true,
       "links": [],
       "confirmed": false,
-      "note": "Hotline numbers come from src/constants/safety.ts. The history-and-privacy line above the list is added in a later step and needs the therapist's review."
+      "note": "Hotline numbers come from src/constants/safety.ts. The privacy line above the list is a draft and needs the therapist's review."
     },
     "breathing-grounding": {
       "label": "Breathing + grounding exercises",
       "type": "exercise",
       "exercise": "physiological-sigh",
-      "also": ["box-breathing", "extended-exhale", "grounding-54321"],
+      "also": [
+        "box-breathing",
+        "extended-exhale",
+        "grounding-54321"
+      ],
       "confirmed": true
     },
     "find-a-therapist": {
       "label": "Finding a therapist",
       "type": "links",
-      "links": [],
+      "links": [
+        {
+          "kind": "web",
+          "label": "Psychology Today therapist finder",
+          "value": "https://www.psychologytoday.com/us/therapists"
+        },
+        {
+          "kind": "web",
+          "label": "Open Path Collective (lower-cost therapy)",
+          "value": "https://openpathcollective.org/"
+        },
+        {
+          "kind": "web",
+          "label": "Inclusive Therapists",
+          "value": "https://www.inclusivetherapists.com/"
+        },
+        {
+          "kind": "web",
+          "label": "AAMFT Therapist Locator (couple and family therapists)",
+          "value": "https://www.therapistlocator.net/"
+        }
+      ],
       "confirmed": false,
-      "note": "The therapist supplies this list. Verified directory links are added in a later step."
+      "note": "Directory links verified to load on 2026-11-13. The therapist confirms or replaces this list."
     },
     "communication": {
       "label": "Ways to talk to each other",
